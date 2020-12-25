@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct Exercise2: View {
+    @State var price = ""
+    
+    
     var body: some View {
         
         ZStack {
@@ -26,10 +29,13 @@ struct Exercise2: View {
                         .multilineTextAlignment(.center)
                         .padding()
                     
-                    Text("استبدل هذا ب Text Field")
+                    TextField("Enter value  \(price)", text: $price)
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
                         .keyboardType(.decimalPad)
+                    
+                    
+                    
 
                     VStack(spacing: 30){
                         HStack(spacing: 40){
@@ -38,7 +44,10 @@ struct Exercise2: View {
                                 .scaledToFit()
                                 .frame(width: 50)
                             
-                            Text("0")
+                            
+                            let dollars = (Double(price) ?? 0) * 3.28
+                            Text("\(dollars)")
+                            
                         }
                         HStack(spacing: 40){
                             Image("uk")
@@ -46,14 +55,18 @@ struct Exercise2: View {
                                 .scaledToFit()
                                 .frame(width: 50)
                             
-                            Text("0")
+                            let pound = (Double(price) ?? 0) * 2.46
+                            Text("\(pound)")
                         }
+                        
                         HStack(spacing: 40){
                             Image("eu")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 50)
-                            Text("0")
+                            
+                            let eu = (Double(price) ?? 0) * 2.70
+                            Text("\(eu)")
                         }
                     }.padding(.top, 50)
                     Spacer()
@@ -66,5 +79,6 @@ struct Exercise2: View {
 struct Exercise2_Previews: PreviewProvider {
     static var previews: some View {
         Exercise2()
+            .previewDevice("iPhone 11")
     }
 }
